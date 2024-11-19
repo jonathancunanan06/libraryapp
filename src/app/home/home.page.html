@@ -1,0 +1,45 @@
+<ion-content>
+  <div class="container">
+    <div class="logo">
+      <img src="/assets/images/sendifile2.png" alt="logo"> 
+      <p>sendifile</p>
+    </div>
+
+    <div class="middle">
+      <p class="b">Log in to your Account</p>
+
+      <div *ngIf="emailInput.invalid && emailInput.touched" class="warning">
+        <ion-text color="danger">Email is required.</ion-text>
+      </div>
+      <ion-item class="a" lines="none">
+        <ion-input type="email" [(ngModel)]="email" placeholder="Email" required #emailInput="ngModel">
+          <ion-icon  name="mail-outline" slot="start"></ion-icon>
+        </ion-input>
+      </ion-item>
+
+      <div *ngIf="passwordInput.invalid && passwordInput.touched" class="warning">
+        <ion-text color="danger">Password is required.</ion-text>
+      </div>
+      <ion-item class="a" lines="none">
+        <ion-input [type]="isPasswordVisible ? 'text' : 'password'"  [(ngModel)]="password" placeholder="Password" required #passwordInput="ngModel">
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        </ion-input>
+        <ion-icon class="eye"  [name]="isPasswordVisible ? 'eye-outline' : 'eye-off-outline'"  slot="end" (click)="togglePasswordVisibility()"></ion-icon>
+      </ion-item>
+
+      <button class="login" expand="full" (click)="loginUser()">Login</button>
+
+      <p class="forgot">
+        <a class="sign" routerLink="/forgot">Forgot password?</a>
+      </p>
+    </div>
+
+    <div class="baba">
+      <p>Don't have an account? <a class="sign" routerLink="/signup">Register</a></p>
+    </div>
+
+    <div class="footer">
+      <p class="n">app version {{ appVersion }}</p>
+    </div>
+  </div>
+</ion-content>

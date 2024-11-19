@@ -1,0 +1,44 @@
+
+<ion-content>
+  <div class="container">
+
+    <div class="up">
+
+      <div class="profile">
+        <img  [routerLink]="['/tabs/profile']" src="assets/images/maloi.jpg" alt="profile picture">
+        <p>{{ currentUser.displayName }}</p>
+
+        <ion-icon 
+        class="k" 
+        [class.sunny]="!isDarkMode" 
+        [class.moon]="isDarkMode" 
+        [name]="isDarkMode ? 'moon' : 'sunny'"
+        (click)="toggleTheme()">
+      </ion-icon>
+
+      <ion-toggle class="t" [(ngModel)]="isDarkMode" (ionChange)="toggleTheme()" hidden></ion-toggle>
+
+      </div>
+
+      <div class="search">
+        <ion-item>
+          <ion-input type="text" placeholder="search folders and files">
+            <ion-icon name="search-outline" slot="start"></ion-icon>
+          </ion-input>
+        </ion-item>
+      </div>
+
+    </div>
+
+    <div class="down">
+    
+    </div>
+   
+  </div>
+   <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
+    <ion-fab-button (click)="presentActionSheet()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

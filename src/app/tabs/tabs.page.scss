@@ -1,0 +1,15 @@
+.custom-fab {
+    bottom: 25px; 
+  }
+  
+  ion-tab-bar {
+    padding-bottom: 10px; 
+  }
+
+  .custom-fab ion-fab-button {
+    --background: tomato;
+    --ripple-color: rgba(255, 99, 71, 0.2);
+    --color:white;
+  }
+  
+  

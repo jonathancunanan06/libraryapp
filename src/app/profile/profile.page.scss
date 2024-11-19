@@ -1,0 +1,109 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+
+.up {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    z-index: 1; 
+}
+
+.up .profile {
+    margin: auto;
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: row;
+    align-items: center;
+    width: 80%;
+}
+
+.up .profile img {
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.up .profile p {
+    margin-left: 10px;
+}
+.up .profile .k {
+    margin-left: auto;
+    margin-right: 10px;
+    width: 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.up .search {
+    margin-top: 10px;
+    width: 80%;
+}
+
+.down {
+    width: 80%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.down .logout{
+    width: 100%;
+    height: 40px;
+    background-color:tomato;
+    border: none;
+    font-size: 12px;
+    align-self: center;
+    border-radius: 10px 0 0 10px;
+}
+.down .delete{
+    width: 100%;
+    height: 40px;
+    background-color:rgb(247, 0, 0);
+    border: none;
+    font-size: 12px;
+    align-self: center;
+    border-radius: 0 10px 10px 0;
+}
+.down .mid{
+    width: 100%;
+    height: 40px;
+    background-color:rgb(216, 48, 48);
+    border: none;
+    font-size: 12px;
+    align-self: center;
+}
+
+ion-item {
+    --border-radius: 15px; 
+    overflow: hidden;
+    --inner-border-width: 0;
+}
+.actions{
+    display: flex;
+    flex-direction: row;
+    border-radius: 25px;
+    margin-top: 10px;
+
+}
+.eye{
+    cursor: pointer;
+    font-size: 18px;
+}
+.profilepic{
+    width: 50%;
+    // border-radius: 50%;
+    align-self: center;
+}
+.date{
+    font-size: 10px;
+    align-self: center;
+}

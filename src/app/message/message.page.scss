@@ -1,0 +1,99 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.up {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    z-index: 999; 
+    position: fixed;
+}
+
+.up .profile {
+    margin: auto;
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: row;
+    align-items: center;
+    width: 80%;
+}
+
+.up .profile img {
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.up .profile p {
+    margin-left: 10px;
+}
+.up .profile .k {
+    margin-left: auto;
+    margin-right: 10px;
+    width: 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.up .profile .l {
+    width: 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.up .search {
+    margin-top: 10px;
+    width: 80%;
+}
+
+.down {
+    width: 80%;
+    position: relative;
+    top: 200px;
+    height: auto;
+}
+ion-item {
+    --border-radius: 15px; 
+    overflow: hidden;
+    --inner-border-width: 0;
+}
+
+.t{
+    --track-background:rgb(216, 216, 216);
+    --track-background-checked:rgb(255, 202, 193);
+
+    --handle-background-checked:tomato;
+
+    --handle-width: 15px; 
+    --handle-height: 15px; 
+}
+.t::part(track){
+    height: 10px;
+}
+.k.sunny {
+    color: #f2c94c; 
+}
+.custom-fab {
+    z-index: 10;
+    bottom: 20px; 
+    right: 20px;
+}
+  
+ion-tab-bar {
+    padding-bottom: 0; 
+}
+
+.custom-fab ion-fab-button {
+    --background: tomato;
+    --ripple-color: rgba(255, 99, 71, 0.2);
+    --color:white;
+}
+.b{
+    --background: transparent;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,45 @@
+<ion-content>
+  <div class="container">
+    <div class="logo">
+      <img src="/assets/images/sendifile2.png" alt="logo"> 
+      <p>sendifile</p>
+    </div>
+
+    <div class="middle">
+      <p class="b">Create an Account</p>
+
+      <ion-item class="a" lines="none">
+        <ion-input type="text" [(ngModel)]="username" required placeholder="username">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="a" lines="none">
+        <ion-input type="email" [(ngModel)]="email" required placeholder="Email">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="a" lines="none">
+        <ion-input [type]="isPasswordVisible ? 'text' : 'password'" [(ngModel)]="password" required placeholder="Password">
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        </ion-input>
+        <ion-icon class="eye"  [name]="isPasswordVisible ? 'eye-outline' : 'eye-off-outline'"  slot="end" (click)="togglePasswordVisibility()"></ion-icon>
+      </ion-item>
+
+      <button expand="full" (click)="signUser()">Sign Up</button>
+
+      <p class="forgot">
+        <a class="sign" routerLink="/forgot">Forgot password?</a>
+      </p>
+    </div>
+
+    <div class="baba">
+      <p>Already have an account? <a class="sign" routerLink="/home">Log in</a></p>
+    </div>
+
+    <div class="footer">
+    </div>
+
+  </div>
+</ion-content>

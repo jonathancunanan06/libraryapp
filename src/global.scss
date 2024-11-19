@@ -1,0 +1,102 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+body {
+    --ion-background-color: #ffffff;
+    --ion-text-color: #000000;
+    --ion-toolbar-background: #f8f8f8;
+    --ion-toolbar-color: #000000;
+    --ion-input-background: #f1f1f1;
+    --ion-input-text-color: #000000;
+    --ion-tab-bar-background: #f8f8f8; 
+    --ion-tab-bar-color: #000000;      
+    --ion-button-background:tomato;
+    --ion-button-text-color:rgb(255, 255, 255);
+    --ion-tab-bar-border:none;
+    --ion-list-background:white;
+    --ion-list-color:black;
+  }
+  
+body.dark {
+    --ion-background-color:#000916;
+    --ion-text-color: #ffffff;
+    --ion-toolbar-background: #333333;
+    --ion-toolbar-color: #ffffff;
+    --ion-input-background:#000f25;
+    --ion-input-text-color: #ffffff;
+    --ion-tab-bar-background: #000c1f; 
+    --ion-tab-bar-color: #ffffff;    
+    --ion-button-background:tomato;
+    --ion-list-background:black;
+    --ion-list-color:white;
+  }
+  
+
+ion-tab-bar {
+    --background: var(--ion-tab-bar-background);
+    --color: var(--ion-tab-bar-color);
+    --border:var(--ion-tab-bar-border);
+  }
+  ion-list{
+    --background: var(--ion-list-background);
+    --color: var(--ion-list-color);
+  }
+
+ion-item::part(native) {
+    --background: var(--ion-input-background);
+    --color: var(--ion-input-text-color);
+  }
+  
+ion-button {
+    --background: var(--ion-button-background);
+    --color: var(--ion-button-text-color);
+  }
+  
+  .eye {
+    color: var(--ion-text-color); 
+  }
+  
+  body.dark .eye {
+    color: #ffffff;
+  }
+  
+  body:not(.dark) .eye {
+    color: #000000;
+  }
+
+  

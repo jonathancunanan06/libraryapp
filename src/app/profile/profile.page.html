@@ -1,0 +1,41 @@
+<ion-content>
+  <div class="container">
+
+    <div class="up">
+      <div class="profile">
+        <img src="assets/images/maloi.jpg" alt="profile picture">
+        <p>{{ currentUser?.displayName || 'Username' }}</p>
+      </div>
+    </div>
+
+    <div class="down">
+      <img class="profilepic" src="assets/images/maloi.jpg" alt="profile picture">
+
+      <ion-item>
+        <ion-input>
+          <ion-icon name="camera-outline" slot="start" ></ion-icon>
+        </ion-input>
+        <ion-icon class="eye" name="save-outline" slot="end" ></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-input [(ngModel)]="displayName" placeholder="Edit Username">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+        </ion-input>
+        <ion-icon  class="eye"  name="save-outline" slot="end" (click)="saveDisplayName()"></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-input [(ngModel)]="email" placeholder="Edit Email">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+        </ion-input>
+        <ion-icon class="eye" name="save-outline" slot="end"></ion-icon>
+      </ion-item>
+      
+      <div class="actions">
+        <button class="logout" expand="full" (click)="logout()">Logout</button>
+        <button class="delete" expand="full" (click)="deleteAccount()">Delete Account</button>
+      </div>
+    </div>
+  </div>
+</ion-content>

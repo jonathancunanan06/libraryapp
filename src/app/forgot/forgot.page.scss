@@ -1,0 +1,73 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.logo{
+  position: relative;
+  margin-top: auto;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.logo img{
+width: 50px;
+}
+.logo p{
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  font-size: 18px;
+}
+.middle {
+  position: relative;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.middle .a{
+  width: 80%;
+  height: 54px;
+  border: none;
+  margin-bottom: 20px;
+}
+.middle .b{
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-bottom: 30px;
+}
+.middle input::placeholder{
+  margin-left: 30px;
+}
+.middle button{
+  width: 80%;
+  height: 54px;
+  background-color:tomato;
+  border-radius: 25px;
+  border: none;
+  font-size: 18px;
+}
+.middle .forgot{
+  align-self: center;
+}
+.baba{
+  position: relative;
+  margin: auto;
+}
+.menu{
+  color: white;
+}
+.sign{
+  text-decoration: none;
+  color:tomato
+}
+ion-item{
+  --border-radius:20px;
+  --box-shadow: none;
+}

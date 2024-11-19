@@ -1,0 +1,66 @@
+
+<ion-content>
+  <div class="container">
+
+    <div class="up">
+
+      <div class="profile">
+        <img  [routerLink]="['/tabs/profile']" src="assets/images/maloi.jpg" alt="profile picture">
+        <p>{{ currentUser.displayName }}</p>
+
+        <ion-icon class="k" name="person-add"></ion-icon>
+      </div>
+
+      <div class="search">
+        <ion-item>
+          <ion-input type="text" placeholder="search messages">
+            <ion-icon name="search-outline" slot="start"></ion-icon>
+          </ion-input>
+        </ion-item>
+      </div>
+
+    </div>
+
+    <div class="down">
+
+      <ion-item class="b">
+        <ion-avatar slot="start">
+          <img alt="Silhouette of a person's head" src="assets/images/maloi.jpg">
+        </ion-avatar>
+        <ion-label>Item Avatar</ion-label> 
+      </ion-item>
+
+      <ion-item class="b">
+        <ion-avatar slot="start">
+          <img alt="Silhouette of a person's head" src="assets/images/maloi.jpg">
+        </ion-avatar>
+        <ion-label>Item Avatar</ion-label> 
+      </ion-item>
+
+      <ion-item class="b">
+        <ion-avatar slot="start">
+          <img alt="Silhouette of a person's head" src="assets/images/maloi.jpg">
+        </ion-avatar>
+        <ion-label>Item Avatar</ion-label> 
+      </ion-item>
+
+      <ion-item class="b">
+        <ion-avatar slot="start">
+          <img alt="Silhouette of a person's head" src="assets/images/maloi.jpg">
+        </ion-avatar>
+        <ion-label>Item Avatar</ion-label> 
+      </ion-item>
+
+    
+    </div>
+ 
+   
+  </div>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
+    <ion-fab-button (click)="presentActionSheet()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

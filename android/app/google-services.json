@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1082846384172",
+    "firebase_url": "https://appreport-6ee8a-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "appreport-6ee8a",
+    "storage_bucket": "appreport-6ee8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082846384172:android:dee78d3ccf7d502f334189",
+        "android_client_info": {
+          "package_name": "com.example.fileorganizer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfoK4uvQOeo-oSBD88yE4RrBgnlQpc6aM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
