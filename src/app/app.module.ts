@@ -13,8 +13,6 @@ initializeApp(environment.firebase);
 
 
 
-
-
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
