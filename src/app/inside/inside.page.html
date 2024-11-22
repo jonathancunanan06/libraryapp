@@ -3,11 +3,9 @@
   <div class="container">
 
     <div class="up">
-
       <div class="profile">
         <img  [routerLink]="['/tabs/profile']" src="assets/images/maloi.jpg" alt="profile picture">
-        <p>{{ currentUser.displayName }}</p>
-
+        <p>   {{ currentUser.displayName }}</p>
         <ion-icon 
         class="k" 
         [class.sunny]="!isDarkMode" 
@@ -15,11 +13,8 @@
         [name]="isDarkMode ? 'moon' : 'sunny'"
         (click)="toggleTheme()">
       </ion-icon>
-
       <ion-toggle class="t" [(ngModel)]="isDarkMode" (ionChange)="toggleTheme()" hidden></ion-toggle>
-
       </div>
-
       <div class="search">
         <ion-item>
           <ion-input type="text" placeholder="search folders and files">
@@ -27,11 +22,54 @@
           </ion-input>
         </ion-item>
       </div>
-
     </div>
 
+    <div class="mid">
+          <p class="hi">FILES</p>
+    </div>
+
+
     <div class="down">
-    
+      <div class="j">
+        <img src="assets/icon/file.svg" >
+        <p>Ionic</p>
+      </div>
+      <div class="j">
+        <img src="assets/icon/file.svg" >
+        <p>OpenCv</p>
+      </div>
+      <div class="j">
+        <img src="assets/icon/file.svg" >
+        <p>Math</p>
+      </div>
+      <div class="j">
+        <img src="assets/icon/file.svg" >
+        <p>Science</p>
+      </div>
+      <div class="j">
+        <img src="assets/icon/file.svg" >
+        <p>English</p>
+      </div>
+      <div class="j">
+        <img src="assets/icon/file.svg" >
+        <p>Thesis</p>
+      </div>
+      <div class="j">
+        <img src="assets/icon/file.svg" >
+        <p>Service Culture</p>
+      </div>
+      <div class="j">
+        <img src="assets/icon/file.svg" >
+        <p>Issues</p>
+      </div>
+      <div class="j">
+        <img src="assets/icon/file.svg" >
+        <p>MobCom</p>
+      </div>
+      <div class="j">
+        <img src="assets/icon/file.svg" >
+        <p>PST</p>
+      </div>
     </div>
    
   </div>

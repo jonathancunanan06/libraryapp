@@ -36,6 +36,14 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+@font-face {
+  font-family: 'Sour Gummy';
+  src: url('assets/fonts/Sour_Gummy/SourGummy-VariableFont_wdth\,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+
 body {
     --ion-background-color: #ffffff;
     --ion-text-color: #000000;
@@ -50,6 +58,7 @@ body {
     --ion-tab-bar-border:none;
     --ion-list-background:white;
     --ion-list-color:black;
+    
   }
   
 body.dark {
@@ -64,6 +73,8 @@ body.dark {
     --ion-button-background:tomato;
     --ion-list-background:black;
     --ion-list-color:white;
+    --ion-action-sheet-background::#000f25;
+    --ion-action-sheet-color:black;
   }
   
 
@@ -99,4 +110,23 @@ ion-button {
     color: #000000;
   }
 
+  .card {
+    color: var(--ion-text-color); 
+    background: var(--ion-card-background);
+  }
   
+  body.dark .card {
+    color: #ffffff;
+    background:#000f25 ;
+  }
+  
+  body:not(.dark) .card {
+    color: #000000;
+    background: white;
+  }
+.container{
+  font-family: 'Sour Gummy';
+}
+ion-content{
+  font-family: 'Sour Gummy';
+}
