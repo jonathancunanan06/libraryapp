@@ -80,3 +80,54 @@ ion-item{
   cursor: pointer;
   font-size: 18px;
 }
+
+
+.splash-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.splash-screen img {
+  width: 150px;
+  height: 150px;
+  animation: imageAnimation 3s ease-in-out infinite;
+}
+
+@keyframes imageAnimation {
+  0% {
+    transform: scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+  30% {
+    transform: scale(1.1) rotate(30deg);
+    opacity: 0.8;
+  }
+  60% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+
+.splash-screen p {
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  animation: fadeIn 3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

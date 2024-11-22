@@ -11,6 +11,7 @@ import { Platform } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
 
+  showSplash = true;
   email = '';
   password = '';
   isPasswordVisible: boolean = false;
@@ -26,6 +27,9 @@ export class HomePage implements OnInit {
     this.platform.ready().then(() => {
       this.getAppVersion();
     });
+    setTimeout(() => {
+      this.showSplash = false;
+    }, 3000); 
   }
 
   togglePasswordVisibility() {
