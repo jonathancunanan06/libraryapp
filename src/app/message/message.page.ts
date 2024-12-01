@@ -51,26 +51,29 @@ export class MessagePage implements OnInit {
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Select Action',
+      cssClass: 'custom-action-sheet',
       buttons: [
         {
           text: 'new message',
           icon: 'mail-open-outline',
+          cssClass: 'custom-action-button',
           handler: () => {
             console.log('new message');
-            // Add logic for adding a folder here
           }
         },
         {
           text: 'archive',
           icon: 'archive-outline',
+          cssClass: 'custom-action-button',
           handler: () => {
             console.log('archive');
-            // Add logic for adding a file here
+
           }
         },
         {
           text: 'Cancel',
           role: 'cancel',
+          cssClass: 'custom-action-button',
           handler: () => {
             console.log('Action Sheet closed');
           }

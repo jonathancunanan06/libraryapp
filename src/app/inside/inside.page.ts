@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { getAuth, signOut } from 'firebase/auth';
 import { Platform } from '@ionic/angular';
 import { AuthService } from '../firebase.service';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController,AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-inside',
@@ -15,12 +15,12 @@ export class InsidePage implements OnInit {
   auth=getAuth()
   isDarkMode: boolean =false;
   currentUser: any = null;
+  folders: { name: string }[] = [];
 
-  constructor(private router:Router,private platform:Platform,private authService: AuthService,private actionSheetController: ActionSheetController) { 
+  constructor(private router:Router,private platform:Platform,private authService: AuthService,private actionSheetController: ActionSheetController,  private alertController: AlertController) { 
     this.isDarkMode = document.body.classList.contains('dark');
   }
   
-
   ngOnInit() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
@@ -35,7 +35,27 @@ export class InsidePage implements OnInit {
       this.currentUser = user;
       console.log(this.currentUser);
     });
+
+        const savedFolders = localStorage.getItem('folders');
+        if (savedFolders) {
+          this.folders = JSON.parse(savedFolders);
+        } else {
+          this.folders = [
+          ];
+          this.saveFoldersToLocalStorage();
+        }
   }
+
+  isFolderModalOpen = false;
+
+  openFolderModal() {
+    this.isFolderModalOpen = true;
+  }
+
+  closeFolderModal() {
+    this.isFolderModalOpen = false;
+  }
+
   toggleTheme() {
     // pag iba kung light o dark
     this.isDarkMode = !this.isDarkMode;
@@ -50,26 +70,28 @@ export class InsidePage implements OnInit {
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Select Action',
+      cssClass: 'custom-action-sheet',
       buttons: [
         {
           text: 'Add Folder',
           icon: 'folder-open-outline',
+          cssClass: 'custom-action-button',
           handler: () => {
-            console.log('Add Folder clicked');
-            // Add logic for adding a folder here
+            this.addFolder(); 
           }
         },
         {
           text: 'Add File',
           icon: 'document-text-outline',
+          cssClass: 'custom-action-button',
           handler: () => {
             console.log('Add File clicked');
-            // Add logic for adding a file here
           }
         },
         {
           text: 'Cancel',
           role: 'cancel',
+          cssClass: 'custom-action-button',
           handler: () => {
             console.log('Action Sheet closed');
           }
@@ -79,4 +101,42 @@ export class InsidePage implements OnInit {
     await actionSheet.present();
   }
 
+  async addFolder() {
+    const alert = await this.alertController.create({
+      header: 'New Folder',
+      inputs: [
+        {
+          name: 'folderName',
+          type: 'text',
+          placeholder: 'Enter folder name',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Add Folder canceled');
+          }
+        },
+        {
+          text: 'Add',
+          handler: (data: any) => {
+            if (data.folderName) {
+              this.folders.push({ name: data.folderName });
+              this.saveFoldersToLocalStorage();
+              console.log(`Folder "${data.folderName}" added`);
+            } else {
+              console.log('No folder name provided');
+            }
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  saveFoldersToLocalStorage() {
+    localStorage.setItem('folders', JSON.stringify(this.folders));
+  }
 }

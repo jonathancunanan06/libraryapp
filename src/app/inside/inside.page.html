@@ -1,19 +1,17 @@
-
 <ion-content>
   <div class="container">
-
     <div class="up">
       <div class="profile">
-        <img  [routerLink]="['/tabs/profile']" src="assets/images/maloi.jpg" alt="profile picture">
-        <p>   {{ currentUser.displayName }}</p>
+        <img [routerLink]="['/tabs/profile']" src="assets/images/maloi.jpg" alt="profile picture">
+        <p>{{ currentUser.displayName }}</p>
         <ion-icon 
-        class="k" 
-        [class.sunny]="!isDarkMode" 
-        [class.moon]="isDarkMode" 
-        [name]="isDarkMode ? 'moon' : 'sunny'"
-        (click)="toggleTheme()">
-      </ion-icon>
-      <ion-toggle class="t" [(ngModel)]="isDarkMode" (ionChange)="toggleTheme()" hidden></ion-toggle>
+          class="k" 
+          [class.sunny]="!isDarkMode" 
+          [class.moon]="isDarkMode" 
+          [name]="isDarkMode ? 'moon' : 'sunny'"
+          (click)="toggleTheme()">
+        </ion-icon>
+        <ion-toggle class="t" [(ngModel)]="isDarkMode" (ionChange)="toggleTheme()" hidden></ion-toggle>
       </div>
       <div class="search">
         <ion-item>
@@ -24,60 +22,38 @@
       </div>
     </div>
 
-    <div class="mid">
-          <p class="hi">FOLDERS</p>
-          <p class="hi">FILES</p>
-    </div>
-
-
-    <div class="down">
-      <div class="j">
-        <img src="assets/icon/file.svg" >
-        <p>Ionic</p>
-      </div>
-      <div class="j">
-        <img src="assets/icon/file.svg" >
-        <p>OpenCv</p>
-      </div>
-      <div class="j">
-        <img src="assets/icon/file.svg" >
-        <p>Math</p>
-      </div>
-      <div class="j">
-        <img src="assets/icon/file.svg" >
-        <p>Science</p>
-      </div>
-      <div class="j">
-        <img src="assets/icon/file.svg" >
-        <p>English</p>
-      </div>
-      <div class="j">
-        <img src="assets/icon/file.svg" >
-        <p>Thesis</p>
-      </div>
-      <div class="j">
-        <img src="assets/icon/file.svg" >
-        <p>Service Culture</p>
-      </div>
-      <div class="j">
-        <img src="assets/icon/file.svg" >
-        <p>Issues</p>
-      </div>
-      <div class="j">
-        <img src="assets/icon/file.svg" >
-        <p>MobCom</p>
-      </div>
-      <div class="j">
-        <img src="assets/icon/file.svg" >
-        <p>PST</p>
+    <div class="down" *ngIf="folders.length > 0; else noFoldersTemplate">
+      <div *ngFor="let folder of folders" class="j" (click)="openFolderModal()">
+        <img src="assets/icon/file.svg" alt="Folder Icon">
+        <p>{{ folder.name }}</p>
       </div>
     </div>
-   
+    
+    <ng-template #noFoldersTemplate>
+      <div class="no-folders">
+        <p>No folders.</p>
+      </div>
+    </ng-template>
+    
   </div>
-   <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
     <ion-fab-button (click)="presentActionSheet()">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 </ion-content>
+
+<ion-modal [isOpen]="isFolderModalOpen" (didDismiss)="closeFolderModal()">
+  <ng-template>
+      <ion-toolbar class="d">
+        <ion-title>Folder Name</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeFolderModal()">close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    <ion-content>
+
+    </ion-content>
+  </ng-template>
+</ion-modal>

@@ -8,20 +8,28 @@
     <div class="middle">
       <p class="b">Create an Account</p>
 
+
       <ion-item class="a" lines="none">
-        <ion-input type="text" [(ngModel)]="username" required placeholder="username">
+        <ion-input type="text" [(ngModel)]="username" required placeholder="username" >
           <ion-icon name="person-outline" slot="start"></ion-icon>
         </ion-input>
       </ion-item>
+      
 
+      <div *ngIf="emailInput.invalid && emailInput.touched" class="warning">
+        <ion-text color="danger">Email is required.</ion-text>
+      </div>
       <ion-item class="a" lines="none">
-        <ion-input type="email" [(ngModel)]="email" required placeholder="Email">
+        <ion-input type="email" [(ngModel)]="email" required placeholder="Email" #emailInput="ngModel">
           <ion-icon name="mail-outline" slot="start"></ion-icon>
         </ion-input>
       </ion-item>
 
+      <div *ngIf="passwordInput.invalid && passwordInput.touched" class="warning">
+        <ion-text color="danger">Password is required.</ion-text>
+      </div>
       <ion-item class="a" lines="none">
-        <ion-input [type]="isPasswordVisible ? 'text' : 'password'" [(ngModel)]="password" required placeholder="Password">
+        <ion-input [type]="isPasswordVisible ? 'text' : 'password'" [(ngModel)]="password" required placeholder="Password" #passwordInput="ngModel"  maxlength="8">
           <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
         </ion-input>
         <ion-icon class="eye"  [name]="isPasswordVisible ? 'eye-outline' : 'eye-off-outline'"  slot="end" (click)="togglePasswordVisibility()"></ion-icon>

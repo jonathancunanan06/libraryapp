@@ -130,3 +130,11 @@ ion-button {
 ion-content{
   font-family: 'Sour Gummy';
 }
+body:not(.dark) .custom-action-sheet{
+--color:black;
+--ion-text-color:black;
+}
+body:not(.dark) .custom-action-button{
+  --color:black;
+  --ion-text-color:black;
+  }

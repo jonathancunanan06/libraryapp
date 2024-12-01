@@ -51,6 +51,15 @@ export class SignupPage implements OnInit {
     return regex.test(username);
   }
 
+  validatePassword(password: string): boolean {
+    const regex = /^[a-zA-Z0-9]{8,}$/;
+    return regex.test(password);
+  }
+  validateEmail(email: string): boolean {
+    const regex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    return regex.test(email);
+  }
+  
   async signUser() {
 
     if (!this.username.trim()) {
@@ -59,6 +68,18 @@ export class SignupPage implements OnInit {
     }
     if (!this.validateUsername(this.username)) {
       this.presentToast('Username must be alphanumeric with no spaces or special characters.');
+      return;
+    }
+    if (!this.email.trim()) {
+      this.presentToast('Please enter email');
+      return;
+    }
+    if (!this.validateEmail(this.email)) {
+      this.presentToast('Invalid Email');
+      return;
+    }
+    if (!this.validatePassword(this.password)) {
+      this.presentToast('Password must atleat 8 alphanumeric characters');
       return;
     }
 
