@@ -52,7 +52,7 @@ export class SignupPage implements OnInit {
   }
 
   validatePassword(password: string): boolean {
-    const regex = /^[a-zA-Z0-9]{8,}$/;
+    const regex = /^[a-zA-Z0-9]{8,15}$/;
     return regex.test(password);
   }
   validateEmail(email: string): boolean {

@@ -23,15 +23,17 @@
     </div>
 
     <div class="down" *ngIf="folders.length > 0; else noFoldersTemplate">
-      <div *ngFor="let folder of folders" class="j" (click)="openFolderModal()">
-        <img src="assets/icon/file.svg" alt="Folder Icon">
-        <p>{{ folder.name }}</p>
+      <div *ngFor="let folder of folders" class="j" >
+        <img class="a" src="assets/icon/file.svg" alt="Folder Icon"(click)="openFolderModal(folder.name)">
+        <p class="b">{{ folder.name }}</p>
+        <ion-icon class="c" name="ellipsis-vertical-outline" (click)="manageFolder(folder.name)"></ion-icon>
       </div>
     </div>
     
     <ng-template #noFoldersTemplate>
       <div class="no-folders">
-        <p>No folders.</p>
+        <img class="g" src="assets/images/girl2.gif" alt="Folder Icon">
+        <p>Add folders here.</p>
       </div>
     </ng-template>
     
@@ -44,16 +46,45 @@
   </ion-fab>
 </ion-content>
 
+
 <ion-modal [isOpen]="isFolderModalOpen" (didDismiss)="closeFolderModal()">
   <ng-template>
-      <ion-toolbar class="d">
-        <ion-title>Folder Name</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="closeFolderModal()">close</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    <ion-content>
+    <div class="f">
 
-    </ion-content>
+    <div class="d">
+      <ion-title>{{selectedFolderName}}</ion-title>
+      <ion-buttons slot="end">
+        <ion-icon name="arrow-back" (click)="closeFolderModal()"></ion-icon>
+      </ion-buttons>
+    </div>
+
+    <div class="search">
+      <ion-item>
+        <ion-input type="text" placeholder="search folders and files">
+          <ion-icon name="search-outline" slot="start"></ion-icon>
+        </ion-input>
+      </ion-item>
+    </div>
+
+    <div class="e">
+        <div *ngFor="let file of folderFiles" class="j">
+          <img class="a" src="assets/icon/file.svg" alt="Folder Icon">
+          <p class="b">{{ file.name }}</p>
+          <ion-icon class="c" name="ellipsis-vertical-outline" (click)="manageFile(file.name)"></ion-icon>
+        </div>
+
+       
+    </div>
+     <div class="fix">
+    </div>
+
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
+          <ion-fab-button (click)="presentActionSheet()">
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      
+      </div>
   </ng-template>
 </ion-modal>
+

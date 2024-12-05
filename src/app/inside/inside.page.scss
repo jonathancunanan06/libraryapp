@@ -41,7 +41,7 @@
     font-size: 22px;
     cursor: pointer;
 }
-.up .search {
+.search {
     margin-top: 5px;
     width: 80%;
 }
@@ -67,28 +67,36 @@
     overflow-y: scroll;
     flex-wrap: wrap;
     position: relative;
-    justify-content: start;
-    align-items: start;
     width: 100%;
     padding: 10px;
+    padding-bottom: 100px;
 }
-.down .j {
-    width: 30%;
+.j {
+    width: 85%;
     margin: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding-bottom: 30px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    height: 70px;
+}
+.j .a {
+    width: 70px;
+    padding: 10px;
+    margin-left: 15px;
+}
+.j .b{
+    margin-right: auto;
+    margin-left: 10px;
+}
+.j .c{
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 25px;
+}
 
-}
-.down .j img {
-    width: 70%;
-}
-.down .j p{
-    margin-top: -10px;
-    
-}
 
 
 ion-item {
@@ -119,12 +127,50 @@ ion-tab-bar {
     --color:white;
 }
 .d{
-    --background:none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    z-index: 1; 
+    position: relative;
+    padding: 20px;
+}
+.d ion-icon{
+    margin-right: 10px;
+    font-size: 22px;
+}
+.f .search{
+    padding-bottom: 20px;
+}
+.e{
+    width: 95%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: auto;
+    margin-bottom: auto;  
+}
+
+.f{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    padding-bottom: 50px;
 }
 .no-folders{
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    margin-bottom: 100px;
 }
-  
+.no-folders p{
+    margin-top: -20px;
+}
