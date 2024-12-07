@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 92.5vh;
+    height: 90vh;
 }
 
 .up {
@@ -43,7 +43,7 @@
 }
 .search {
     margin-top: 5px;
-    width: 80%;
+    width: 95%;
 }
 
 .mid{
@@ -72,7 +72,7 @@
     padding-bottom: 100px;
 }
 .j {
-    width: 85%;
+    width: 100%;
     margin: auto;
     display: flex;
     flex-direction: row;
@@ -80,21 +80,22 @@
     align-items: center;
     margin-bottom: 15px;
     border-radius: 10px;
-    height: 70px;
+    height: 55px;
 }
 .j .a {
-    width: 70px;
+    width: 60px;
     padding: 10px;
     margin-left: 15px;
 }
 .j .b{
     margin-right: auto;
     margin-left: 10px;
+    font-family: 'Sour Gummy';
 }
 .j .c{
     margin-left: auto;
     margin-right: 10px;
-    font-size: 25px;
+    font-size: 15px;
 }
 
 
@@ -141,6 +142,9 @@ ion-tab-bar {
     margin-right: 10px;
     font-size: 22px;
 }
+.d ion-title{
+    font-family: 'Sour Gummy';
+}
 .f .search{
     padding-bottom: 20px;
 }
@@ -173,4 +177,10 @@ ion-tab-bar {
 }
 .no-folders p{
     margin-top: -20px;
+}
+ion-input{
+    font-family: 'Sour Gummy';
+}
+.g p{
+    font-family:'Sour Gummy';
 }

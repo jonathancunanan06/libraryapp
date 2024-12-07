@@ -33,14 +33,14 @@
     <ng-template #noFoldersTemplate>
       <div class="no-folders">
         <img class="g" src="assets/images/girl2.gif" alt="Folder Icon">
-        <p>Add folders here.</p>
+        <p class="confirm">Add folders here.</p>
       </div>
     </ng-template>
     
   </div>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
-    <ion-fab-button (click)="presentActionSheet()">
+    <ion-fab-button (click)="presentActionSheetFolder()">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -66,20 +66,26 @@
       </ion-item>
     </div>
 
-    <div class="e">
+    <div class="e" *ngIf="folderFiles.length > 0; else noFilesTemplate">
         <div *ngFor="let file of folderFiles" class="j">
           <img class="a" src="assets/icon/file.svg" alt="Folder Icon">
           <p class="b">{{ file.name }}</p>
           <ion-icon class="c" name="ellipsis-vertical-outline" (click)="manageFile(file.name)"></ion-icon>
-        </div>
-
-       
+        </div>       
     </div>
+
+    <ng-template #noFilesTemplate>
+      <div class="no-folders">
+        <img class="g" src="assets/images/girl2.gif" alt="Folder Icon">
+        <p class="confirm">Upload files here.</p>
+      </div>
+    </ng-template>
+
      <div class="fix">
     </div>
 
         <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
-          <ion-fab-button (click)="presentActionSheet()">
+          <ion-fab-button (click)="presentActionSheetFile()">
             <ion-icon name="add-outline"></ion-icon>
           </ion-fab-button>
         </ion-fab>

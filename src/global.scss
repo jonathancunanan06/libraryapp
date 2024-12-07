@@ -130,20 +130,29 @@ ion-button {
 ion-content{
   font-family: 'Sour Gummy';
 }
-body:not(.dark) .custom-action-sheet{
---color:black;
---ion-text-color:black;
-}
-body:not(.dark) .custom-action-button{
-  --color:black;
-  --ion-text-color:black;
-  }
+
 
 body.dark .j{
-  background-color: #00112a;
   box-shadow:none;
 }
+
 body .j{
-  background-color: #ffffff;
-  box-shadow: 1px 4px 3px 1px rgb(133, 133, 133);
+  // background:  linear-gradient(to right, #000f2522,rgba(255, 99, 71, 0.147));
+  box-shadow: 0 1px 1px 0 rgb(133, 133, 133);
+}
+
+body:not(.dark) .custom-action-sheet .action-sheet-group {
+  --ion-button-color:black;
+  background: linear-gradient(to right, #000f25d4,rgba(255, 99, 71, 0.147));
+  font-family: 'Sour Gummy';
+}
+
+.confirm{
+  font-family: 'Sour Gummy';
+}
+body .icon{
+  color: tomato;
+}
+body.dark .icon{
+  color: white;
 }

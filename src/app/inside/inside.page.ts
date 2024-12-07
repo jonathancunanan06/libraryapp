@@ -125,7 +125,7 @@ export class InsidePage implements OnInit {
     toast.present();
   }
 
-  async presentActionSheet() {
+  async presentActionSheetFolder() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Select Action',
       cssClass: 'custom-action-sheet',
@@ -138,6 +138,39 @@ export class InsidePage implements OnInit {
             this.addFolder();
           }
         },
+        {
+          text: 'Delete all',
+          icon: 'trash-outline',
+          cssClass: 'custom-action-button',
+          handler: () => {
+            this.clearAllFolders();
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'custom-action-button',
+          handler: () => {
+            console.log('Action Sheet closed');
+          }
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
+
+  clearAllFolders() {
+    localStorage.removeItem('folders');
+    this.folders = []; 
+    this.presentToast('All folders have been deleted'); 
+  }
+  
+
+  async presentActionSheetFile() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Select Action',
+      cssClass: 'custom-action-sheet',
+      buttons: [
         {
           text: 'Add File',
           icon: 'document-text-outline',
@@ -163,6 +196,7 @@ export class InsidePage implements OnInit {
   async addFolder() {
     const alert = await this.alertController.create({
       header: 'New Folder',
+      cssClass:'confirm',
       inputs: [
         {
           name: 'folderName',
@@ -230,6 +264,7 @@ export class InsidePage implements OnInit {
   async renameFolder(folderName: string) {
     const alert = await this.alertController.create({
       header: 'Rename Folder',
+      cssClass:'confirm',
       inputs: [
         {
           name: 'newFolderName',
@@ -266,6 +301,7 @@ export class InsidePage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Confirm Deletion',
       message: `Are you sure you want to delete the folder "${folderName}"? This action cannot be undone.`,
+      cssClass:'confirm',
       buttons: [
         {
           text: 'Cancel',
@@ -294,6 +330,7 @@ export class InsidePage implements OnInit {
   async manageFile(fileName: string) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Manage File',
+      cssClass: 'custom-action-sheet',
       buttons: [
         {
           text: 'Share',
@@ -322,6 +359,7 @@ export class InsidePage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Confirm Deletion',
       message: `Are you sure you want to delete the file "${fileName}"? This action cannot be undone.`,
+      cssClass:'confirm',
       buttons: [
         {
           text: 'Cancel',
@@ -331,6 +369,7 @@ export class InsidePage implements OnInit {
           text: 'Delete',
           handler: () => {
             this.deleteFile(fileName);
+            
           }
         }
       ]
@@ -343,9 +382,12 @@ export class InsidePage implements OnInit {
     if (selectedFolder) {
       selectedFolder.files = selectedFolder.files.filter(file => file.name !== fileName);
       this.saveFoldersToLocalStorage();
+      this.closeFolderModal();
+      this.openFolderModal(this.selectedFolderName); 
       this.presentToast(`File "${fileName}" deleted`);
     }
   }
+  
 
   saveFoldersToLocalStorage() {
     localStorage.setItem('folders', JSON.stringify(this.folders));

@@ -21,40 +21,33 @@
 
     </div>
 
-    <div class="down">
-
-      <ion-item class="b">
-        <ion-avatar slot="start">
-          <img alt="Silhouette of a person's head" src="assets/images/maloi.jpg">
-        </ion-avatar>
-        <ion-label>Maloi Recarde</ion-label> 
-      </ion-item>
-
-      <ion-item class="b">
-        <ion-avatar slot="start">
-          <img alt="Silhouette of a person's head" src="assets/images/maloi.jpg">
-        </ion-avatar>
-        <ion-label>Gwen Apuli</ion-label> 
-      </ion-item>
-
-      <ion-item class="b">
-        <ion-avatar slot="start">
-          <img alt="Silhouette of a person's head" src="assets/images/maloi.jpg">
-        </ion-avatar>
-        <ion-label>Sheena</ion-label> 
-      </ion-item>
-
-      <ion-item class="b">
-        <ion-avatar slot="start">
-          <img alt="Silhouette of a person's head" src="assets/images/maloi.jpg">
-        </ion-avatar>
-        <ion-label>Joana</ion-label> 
-      </ion-item>
-
-    
+    <div class="mid">
+        <div *ngFor="let friends of friends" class="l" >
+          <div class="a">
+            <img  src="assets/images/maloi.jpg" alt="User Icon" (click)="openChatModal(friends.name)">
+          </div>
+          <div class="b">
+            <p >{{ friends.name.length > 5 ? (friends.name | slice:0:5) + '...' : friends.name }}</p>
+          </div>
+        </div>
     </div>
- 
-   
+
+    <div class="down" *ngIf="friends.length > 0; else noUsersTemplate">
+
+      <div *ngFor="let friends  of friends" class="j" >
+        <img class="a" src="assets/images/maloi.jpg" alt="User Icon" (click)="openChatModal(friends.name)">
+        <p class="b">{{ friends.name }}</p>
+        <ion-icon class="c" name="ellipsis-vertical-outline"></ion-icon>
+      </div>
+    </div>
+    
+    <ng-template #noUsersTemplate>
+      <div class="no-folders">
+        <img class="g" src="assets/images/girl2.gif" alt="Folder Icon">
+        <p>No messages yet.</p>
+      </div>
+    </ng-template>
+
   </div>
   
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="custom-fab">
@@ -64,3 +57,27 @@
   </ion-fab>
 
 </ion-content>
+
+<ion-modal [isOpen]="isChatModalOpen" (didDismiss)="closeChatModal()">
+  <ng-template>
+    <div class="f">
+
+    <div class="d">
+      <ion-title>{{username}}</ion-title>
+      <ion-buttons slot="end">
+        <ion-icon name="arrow-back" (click)="closeChatModal()"></ion-icon>
+      </ion-buttons>
+    </div>
+
+     <div class="fix">
+      <ion-item>
+        <ion-input placeholder="enter chat" > </ion-input>
+        <ion-icon class="icon" name="add-outline" slot="start"></ion-icon>
+        <ion-icon class="icon" name="send-outline" slot="end"></ion-icon>
+      </ion-item>
+    </div>
+
+      
+      </div>
+  </ng-template>
+</ion-modal>

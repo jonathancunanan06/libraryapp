@@ -19,14 +19,14 @@
       </ion-item> -->
 
       <ion-item>
-        <ion-input [(ngModel)]="displayName" placeholder="Edit Username">
+        <ion-input class="confirm" [(ngModel)]="displayName" placeholder="Edit Username">
           <ion-icon name="person-outline" slot="start"></ion-icon>
         </ion-input>
         <ion-icon  class="eye"  name="save-outline" slot="end" (click)="saveDisplayName()"></ion-icon>
       </ion-item>
 
       <ion-item>
-        <ion-input [(ngModel)]="email" placeholder="Edit Email">
+        <ion-input class="confirm" [(ngModel)]="email" placeholder="Edit Email">
           <ion-icon name="mail-outline" slot="start"></ion-icon>
         </ion-input>
         <ion-icon class="eye" name="save-outline" slot="end"></ion-icon>

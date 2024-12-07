@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    height: 90vh;
 }
 
 .up {
@@ -11,9 +11,9 @@
     align-items: center;
     width: 100%;
     padding-top: 20px;
-    padding-bottom: 40px;
-    z-index: 999; 
-    position: fixed;
+    padding-bottom: 10px;
+    z-index: 1; 
+    position: relative;
 }
 
 .up .profile {
@@ -38,25 +38,54 @@
     margin-left: auto;
     margin-right: 10px;
     width: 30px;
-    font-size: 20px;
+    font-size: 22px;
     cursor: pointer;
 }
-.up .profile .l {
-    width: 30px;
-    font-size: 20px;
-    cursor: pointer;
-}
-.up .search {
+.search {
     margin-top: 5px;
-    width: 80%;
+    width: 95%;
+    position: relative;
 }
 
 .down {
-    width: 80%;
+    display: flex;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex-direction: column;
     position: relative;
-    top: 200px;
-    height: auto;
+    width: 100%;
+    padding: 10px;
+    padding-bottom: 100px;
+    margin-bottom: auto;
 }
+.down .j {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+.down .j .a {
+    width: 60px;
+    padding: 10px;
+    margin-left: 15px;
+    border-radius: 50%;
+}
+.down .j .b{
+    margin-right: auto;
+    margin-left: 10px;
+    font-family: 'Sour Gummy';
+}
+.down .j .c{
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+
+
 ion-item {
     --border-radius: 15px; 
     overflow: hidden;
@@ -64,22 +93,13 @@ ion-item {
 }
 
 .t{
-    --track-background:rgb(216, 216, 216);
-    --track-background-checked:rgb(255, 202, 193);
-
-    --handle-background-checked:tomato;
-
-    --handle-width: 15px; 
-    --handle-height: 15px; 
+    display: none;
 }
-.t::part(track){
-    height: 10px;
-}
+
 .k.sunny {
     color: #f2c94c; 
 }
 .custom-fab {
-    z-index: 10;
     bottom: 20px; 
     right: 20px;
 }
@@ -93,7 +113,95 @@ ion-tab-bar {
     --ripple-color: rgba(255, 99, 71, 0.2);
     --color:white;
 }
-.b{
-    --background: transparent;
-    margin-bottom: 10px;
+.d{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    z-index: 1; 
+    position: relative;
+    padding: 20px;
+}
+.d ion-icon{
+    margin-right: 10px;
+    font-size: 22px;
+}
+.d ion-title{
+    font-family: 'Sour Gummy';
+}
+.f .search{
+    padding-bottom: 20px;
+}
+.e{
+    width: 95%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: auto;
+    margin-bottom: auto;  
+}
+
+.f{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    padding-bottom: 50px;
+    margin-bottom: auto;
+}
+.fix{
+    margin-top: auto;
+}
+.no-folders{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 100px;
+}
+.no-folders p{
+    margin-top: -20px;
+}
+ion-input{
+    font-family: 'Sour Gummy';
+}
+.g p{
+    font-family:'Sour Gummy';
+}
+
+.mid{
+    width: 90%;
+    display: flex;
+    overflow-x: auto;
+    flex-direction: row;
+    height: auto;
+    flex-shrink: 0;
+}
+.mid .l{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: none;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+.mid .l .a{
+    width: 60px;
+    position: relative;
+}
+.mid .l .a img{
+    border-radius: 50%;
+    object-fit:cover;
+}
+.mid .l .b{
+    margin-top: -20px;
+    font-family: 'Sour Gummy';
+    position: relative;
 }

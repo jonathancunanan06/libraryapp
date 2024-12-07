@@ -15,6 +15,12 @@ export class MessagePage implements OnInit {
   auth=getAuth()
   isDarkMode: boolean =false;
   currentUser: any = null;
+  friends: { name: string }[] = [
+    { name: 'Maloi My Love' },
+    { name: 'Bob' },
+    { name: 'Charlie' },
+  ];
+  username: string = '';
 
   constructor(private router:Router,private platform:Platform,private authService: AuthService,private actionSheetController: ActionSheetController) { 
     this.isDarkMode = document.body.classList.contains('dark');
@@ -35,7 +41,18 @@ export class MessagePage implements OnInit {
       this.currentUser = user;
       console.log(this.currentUser);
     });
-    
+  }
+
+  isChatModalOpen = false;
+
+  openChatModal(username: string) {
+    this.username = username;
+    const selectedFolder = this.friends.find(f => f.name === username);
+    this.isChatModalOpen = true;
+  }
+
+  closeChatModal() {
+    this.isChatModalOpen = false;
   }
 
   toggleTheme() {
