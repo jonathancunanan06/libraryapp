@@ -8,7 +8,7 @@
         <img  [routerLink]="['/tabs/profile']" src="assets/images/maloi.jpg" alt="profile picture">
         <p>{{ currentUser.displayName }}</p>
 
-        <ion-icon class="k" name="person-add"></ion-icon>
+        <ion-icon class="k" name="person-add" (click)="openUsersModal()"></ion-icon>
       </div>
 
       <div class="search">
@@ -22,16 +22,16 @@
     </div>
 
     <div class="mid">
-        <div *ngFor="let friends of friends" class="l" >
-          <div class="a">
-            <img  src="assets/images/maloi.jpg" alt="User Icon" (click)="openChatModal(friends.name)">
-          </div>
-          <div class="b">
-            <p >{{ friends.name.length > 5 ? (friends.name | slice:0:5) + '...' : friends.name }}</p>
-          </div>
+      <div *ngFor="let friend of friends" class="l">
+        <div class="a">
+          <img src="assets/images/maloi.jpg" alt="User Icon" (click)="openChatModal(friend.name)">
         </div>
+        <div class="b">
+          <p>{{ friend.name.length > 5 ? (friend.name | slice:0:5) + '...' : friend.name }}</p>
+        </div>
+      </div>
     </div>
-
+    
     <div class="down" *ngIf="friends.length > 0; else noUsersTemplate">
 
       <div *ngFor="let friends  of friends" class="j" >
@@ -69,14 +69,50 @@
       </ion-buttons>
     </div>
 
+    <div class="chat-messages">
+      <div *ngFor="let message of messages" class="message">
+        <p class="confirm"> {{ message.text }}</p>
+      </div>
+    </div>
+
      <div class="fix">
       <ion-item>
-        <ion-input placeholder="enter chat" > </ion-input>
+        <ion-input placeholder="enter chat"  [(ngModel)]="chatMessage"  > </ion-input>
         <ion-icon class="icon" name="add-outline" slot="start"></ion-icon>
-        <ion-icon class="icon" name="send-outline" slot="end"></ion-icon>
+        <ion-icon class="icon" name="send-outline" slot="end" (click)="sendMessage()"></ion-icon>
       </ion-item>
     </div>
 
+      
+      </div>
+  </ng-template>
+</ion-modal>
+
+<ion-modal [isOpen]="isUsersModalOpen" (didDismiss)="closeUsersModal()">
+  <ng-template>
+    <div class="f">
+
+      
+    <div class="d">
+      <ion-title>Users</ion-title>
+      <ion-buttons slot="end">
+        <ion-icon name="arrow-back" (click)="closeUsersModal()"></ion-icon>
+      </ion-buttons>
+    </div>
+
+      <div class="e" *ngIf="users.length > 0; else walaTemplate">
+        <div *ngFor="let users  of users" class="j" >
+          <img class="a" src="assets/images/maloi.jpg" alt="User Icon">
+          <p class="b">{{ users.name }}</p>
+          <ion-icon class="c" name="ellipsis-vertical-outline" (click)="presentActionSheetAddfriend(users.name)"></ion-icon>
+        </div>
+      </div>
+
+      <ng-template #walaTemplate>
+        <div class="no-folders">
+          <p class="confirm">No users available.</p>
+        </div>
+      </ng-template>
       
       </div>
   </ng-template>

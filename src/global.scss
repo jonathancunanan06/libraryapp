@@ -42,6 +42,11 @@
   font-weight: 100 900;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Monoton';
+  src: url('assets/fonts/Monoton/Monoton-Regular.ttf') format('truetype');
+  font-style: normal;
+}
 
 
 body {
@@ -155,4 +160,9 @@ body .icon{
 }
 body.dark .icon{
   color: white;
+}
+.title{
+  font-family: 'Monoton';
+  font-size: 30px;
+  margin-top: -5px;
 }
