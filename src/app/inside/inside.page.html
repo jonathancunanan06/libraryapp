@@ -3,7 +3,7 @@
     <div class="up">
       <div class="profile">
         <img [routerLink]="['/tabs/profile']" src="assets/images/maloi.jpg" alt="profile picture">
-        <p>{{ currentUser.displayName }}</p>
+        <p>Hello {{ currentUser.displayName }}!</p>
         <ion-icon 
           class="k" 
           [class.sunny]="!isDarkMode" 
@@ -13,6 +13,11 @@
         </ion-icon>
         <ion-toggle class="t" [(ngModel)]="isDarkMode" (ionChange)="toggleTheme()" hidden></ion-toggle>
       </div>
+
+      <div class="folders">
+        <p>FOLDERS</p>
+      </div>
+
       <div class="search">
         <ion-item>
           <ion-input type="text" placeholder="search folders and files">
@@ -20,6 +25,7 @@
           </ion-input>
         </ion-item>
       </div>
+      
     </div>
 
     <div class="down" *ngIf="folders.length > 0; else noFoldersTemplate">

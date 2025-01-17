@@ -4,19 +4,13 @@
     <div class="up">
       <div class="profile">
         <img src="assets/images/maloi.jpg" alt="profile picture">
-        <p>{{ currentUser?.displayName || 'Username' }}</p>
+        <p>Hello {{ currentUser?.displayName || 'Username' }} !</p>
       </div>
     </div>
 
     <div class="down">
-      <img class="profilepic" src="assets/images/maloi.jpg" alt="profile picture">
 
-      <!-- <ion-item>
-        <ion-input>
-          <ion-icon name="camera-outline" slot="start" ></ion-icon>
-        </ion-input>
-        <ion-icon class="eye" name="save-outline" slot="end" ></ion-icon>
-      </ion-item> -->
+      <img class="profilepic" src="assets/images/maloi.jpg" alt="profile picture">
 
       <ion-item>
         <ion-input class="confirm" [(ngModel)]="displayName" placeholder="Edit Username">
@@ -26,10 +20,9 @@
       </ion-item>
 
       <ion-item>
-        <ion-input class="confirm" [(ngModel)]="email" placeholder="Edit Email">
+        <ion-input class="confirm" [(ngModel)]="email" placeholder="Edit Email" readonly>
           <ion-icon name="mail-outline" slot="start"></ion-icon>
         </ion-input>
-        <ion-icon class="eye" name="save-outline" slot="end"></ion-icon>
       </ion-item>
       
       <div class="actions">

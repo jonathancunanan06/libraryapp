@@ -64,11 +64,12 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    height: 70px;
     margin-bottom: 10px;
     border-radius: 10px;
 }
  .j .a {
-    width: 60px;
+    width: 70px;
     padding: 10px;
     margin-left: 15px;
     border-radius: 50%;
@@ -220,3 +221,32 @@ ion-input{
     flex-direction: column;
 
 }
+.des{
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.des ion-icon{
+    font-size: 80px;
+    margin: 20px;
+}
+#ms{
+    background-color: rgb(59, 59, 255);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+.chat-messages{
+    overflow-y: scroll;
+}
+.message{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+

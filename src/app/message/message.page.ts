@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { getAuth, signOut } from 'firebase/auth';
 import { Platform } from '@ionic/angular';
 import { AuthService } from '../firebase.service';
-import { ActionSheetController,ToastController } from '@ionic/angular';
+import { ActionSheetController,ToastController,AlertController } from '@ionic/angular';
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, onSnapshot, query, orderBy, limit } from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
 
 
@@ -23,16 +23,19 @@ export class MessagePage implements OnInit {
   auth=getAuth()
   isDarkMode: boolean =false;
   currentUser: any = null;
-  friends: { name: string }[] = [
-
-  ];
+  friends: { name: string }[] = [];
   username: string = '';
   users:{name:string}[]=[
   ]
   messages: { sender: string; text: string }[] = [];
   chatMessage: string = ''; 
+  filteredUsers: { name: string }[] = [];
+  searchQuery: string = '';
+  sharedFiles: { sender: string; receiver: string; fileName: string; timestamp: Date }[] = [];
 
-  constructor(private router:Router,private platform:Platform,private authService: AuthService,private actionSheetController: ActionSheetController,private toastController:ToastController) { 
+
+
+  constructor(private router:Router,private platform:Platform,private authService: AuthService,private actionSheetController: ActionSheetController,private toastController:ToastController,private alertController:AlertController) { 
     this.isDarkMode = document.body.classList.contains('dark');
   }
   
@@ -48,17 +51,9 @@ export class MessagePage implements OnInit {
     }
     console.log(this.friends);
     
-    //para makuha yung info ng current user
     this.authService.getCurrentUser().subscribe(user => {
       this.currentUser = user;
       console.log('current user',this.currentUser);
-         if (this.currentUser) {
-          if (!this.friends.some(friend => friend.name === this.currentUser.displayName)) {
-            this.friends.unshift({ name: 'Self' });
-            console.log('Added current user to friends:', this.friends);
-            this.saveFriendsToLocalStorage();
-          }
-        }
     });
 
     const savedFriends = localStorage.getItem('friends');
@@ -67,7 +62,27 @@ export class MessagePage implements OnInit {
     }
 
     this.getUsersFromFirestore();
+    this.listenForMessages();
+    this.listenForSharedFiles(); 
+
   }
+
+  listenForSharedFiles() {
+  const sharedFilesRef = collection(this.db, 'sharedFiles');
+  const q = query(sharedFilesRef, orderBy('timestamp', 'desc'));
+
+  onSnapshot(q, (querySnapshot) => {
+    this.sharedFiles = [];
+    querySnapshot.forEach((doc) => {
+      const fileData = doc.data() as { sender: string; receiver: string; fileName: string; timestamp: Date };
+      if (fileData.receiver === this.currentUser?.displayName) {
+        this.sharedFiles.push(fileData);
+      }
+    });
+    console.log('Shared Files:', this.sharedFiles);
+  });
+}
+
 
   async getUsersFromFirestore() {
     try {
@@ -82,6 +97,7 @@ export class MessagePage implements OnInit {
           });
         }
       });
+      this.filteredUsers = [...this.users]; 
       console.log('Users fetched successfully:', this.users);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -100,6 +116,7 @@ export class MessagePage implements OnInit {
 
   openUsersModal() {
     this.isUsersModalOpen = true;
+    this.filteredUsers = [...this.users];
   }
 
   closeChatModal() {
@@ -108,6 +125,14 @@ export class MessagePage implements OnInit {
   
   closeUsersModal() {
     this.isUsersModalOpen = false;
+    this.searchQuery = '';
+  }
+
+  filterUsers() {
+    const query = this.searchQuery.trim().toLowerCase();
+    this.filteredUsers = this.users.filter((user) =>
+      user.name.toLowerCase().includes(query)
+    );
   }
 
   async presentToast(message: string) {
@@ -120,7 +145,6 @@ export class MessagePage implements OnInit {
   }
 
   toggleTheme() {
-    // pag iba kung light o dark
     if (this.isDarkMode) {
       document.body.classList.add('dark');
       localStorage.setItem('theme','dark')
@@ -170,8 +194,8 @@ export class MessagePage implements OnInit {
       cssClass: 'custom-action-sheet',
       buttons: [
         {
-          text: 'Add Friend',
-          icon: 'person-add-outline',
+          text: 'Pin account',
+          icon: 'pin-outline',
           cssClass: 'custom-action-button',
           handler: () => {
             this.addFriend(name);
@@ -194,11 +218,11 @@ export class MessagePage implements OnInit {
     const isAlreadyFriend = this.friends.some((friend) => friend.name === name);
     if (!isAlreadyFriend) {
       this.friends.push({ name });
-      console.log(`${name} added to friends list.`);
+      console.log(`${name} added to pin list.`);
       this.saveFriendsToLocalStorage()
       this.presentToast(`${name} has been added`)
     } else {
-      console.log(`${name} is already in the friends list.`);
+      console.log(`${name} is already in the pin list.`);
       this.presentToast(`${name} has already been added`)
     }
   }
@@ -207,7 +231,7 @@ export class MessagePage implements OnInit {
     localStorage.setItem('friends', JSON.stringify(this.friends));
   }
 
-  sendMessage() {
+  sendMessages() {
     if (this.chatMessage.trim() !== '') {
       this.messages.push({
         sender: this.currentUser?.displayName || 'You', 
@@ -218,6 +242,104 @@ export class MessagePage implements OnInit {
       console.log('Message is empty');
     }
   }
+
+  async removepin(name: string) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Remove Pin',
+      cssClass: 'custom-action-sheet',
+      buttons: [
+        {
+          text: 'Unpin account',
+          icon: 'close-circle-outline',
+          cssClass: 'custom-action-button',
+          handler: () => {
+            this.removeFriend(name);
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'custom-action-button',
+          handler: () => {
+            console.log('Action Sheet closed');
+          }
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
+
+  removeFriend(name: string) {
+    const friendIndex = this.friends.findIndex((friend) => friend.name === name);
+    if (friendIndex !== -1) {
+      this.friends.splice(friendIndex, 1);
+      this.saveFriendsToLocalStorage();
+      this.presentToast(`${name} has been unpinned`);
+      console.log(`${name} removed from pin list.`);
+    } else {
+      console.log(`${name} is not in the pin list.`);
+      this.presentToast(`${name} is not pinned`);
+    }
+  }
+  
+  async sendFiles() {
+    const alert = await this.alertController.create({
+      header: 'Choose Files',
+      message: `Choose from your list of files.`,
+      cssClass:'confirm',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+listenForMessages() {
+  const messagesRef = collection(this.db, 'messages');
+  const q = query(messagesRef, orderBy('timestamp', 'asc'), limit(50));
+
+  onSnapshot(q, (querySnapshot) => {
+    this.messages = []; 
+    querySnapshot.forEach((doc) => {
+      const messageData = doc.data() as { sender: string; text: string; receiver: string };
+      if ((messageData.receiver === this.currentUser?.displayName || messageData.sender === this.currentUser?.displayName) && messageData.text) {
+        this.messages.push(messageData);
+      }
+    });
+    console.log('Messages:', this.messages);
+  });
+}
+
+
+  sendMessage() {
+    if (this.chatMessage.trim() !== '') {
+      addDoc(collection(this.db, 'messages'), {
+        sender: this.currentUser?.displayName || 'You',
+        receiver: this.username, 
+        text: this.chatMessage.trim(),
+        timestamp: new Date(),
+      })
+      .then(() => {
+        console.log('Message sent successfully');
+      })
+      .catch((error) => {
+        console.error('Error sending message: ', error);
+      });
+      
+
+      this.chatMessage = ''; 
+    } else {
+      console.log('Message is empty');
+    }
+  }
+
+  getMessageClass(sender: string) {
+    return sender === this.currentUser?.displayName ? 'message-sent' : 'message-received';
+  }
+  
   
 }
   

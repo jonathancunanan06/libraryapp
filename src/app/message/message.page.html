@@ -6,9 +6,14 @@
 
       <div class="profile">
         <img  [routerLink]="['/tabs/profile']" src="assets/images/maloi.jpg" alt="profile picture">
-        <p>{{ currentUser.displayName }}</p>
+        <p> Hello {{ currentUser.displayName }}!</p>
 
         <ion-icon class="k" name="person-add" (click)="openUsersModal()"></ion-icon>
+      </div>
+
+      
+      <div class="folders">
+        <p>Messages</p>
       </div>
 
       <div class="search">
@@ -24,7 +29,7 @@
     <div class="mid">
       <div *ngFor="let friend of friends" class="l">
         <div class="a">
-          <img src="assets/images/maloi.jpg" alt="User Icon" (click)="openChatModal(friend.name)">
+          <img src="assets/images/1by1.png" alt="User Icon" (click)="openChatModal(friend.name)">
         </div>
         <div class="b">
           <p>{{ friend.name.length > 5 ? (friend.name | slice:0:5) + '...' : friend.name }}</p>
@@ -35,9 +40,9 @@
     <div class="down" *ngIf="friends.length > 0; else noUsersTemplate">
 
       <div *ngFor="let friends  of friends" class="j" >
-        <img class="a" src="assets/images/maloi.jpg" alt="User Icon" (click)="openChatModal(friends.name)">
+        <img class="a" src="assets/images/1by1.png" alt="User Icon" (click)="openChatModal(friends.name)">
         <p class="b">{{ friends.name }}</p>
-        <ion-icon class="c" name="ellipsis-vertical-outline"></ion-icon>
+        <ion-icon class="c" name="ellipsis-vertical-outline" (click)="removepin(friends.name)"></ion-icon>
       </div>
     </div>
     
@@ -70,15 +75,27 @@
     </div>
 
     <div class="chat-messages">
-      <div *ngFor="let message of messages" class="message">
-        <p class="confirm"> {{ message.text }}</p>
+      <div *ngFor="let message of messages" class="message" [ngClass]="getMessageClass(message.sender)">
+        <p class="confirm"> {{ message.sender }}: </p>
+        <p class="confirm" id="ms"> {{ message.text }}</p>
       </div>
     </div>
+
+    <ion-card *ngFor="let file of sharedFiles">
+      <ion-card-header>
+        <ion-card-title>{{ file.fileName }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Shared by: {{ file.sender }}</p>
+        <p>Received at: {{ file.timestamp | date: 'short' }}</p>
+        <ion-button >Download</ion-button>
+      </ion-card-content>
+    </ion-card>
 
      <div class="fix">
       <ion-item>
         <ion-input placeholder="enter chat"  [(ngModel)]="chatMessage"  > </ion-input>
-        <ion-icon class="icon" name="add-outline" slot="start"></ion-icon>
+        <ion-icon class="icon" name="add-outline" slot="start" (click)="sendFiles()"></ion-icon>
         <ion-icon class="icon" name="send-outline" slot="end" (click)="sendMessage()"></ion-icon>
       </ion-item>
     </div>
@@ -91,20 +108,36 @@
 <ion-modal [isOpen]="isUsersModalOpen" (didDismiss)="closeUsersModal()">
   <ng-template>
     <div class="f">
+      <div class="d">
+        <ion-title>Pin Account</ion-title>
+        <ion-buttons slot="end">
+          <ion-icon name="arrow-back" (click)="closeUsersModal()"></ion-icon>
+        </ion-buttons>
+      </div>
 
-      
-    <div class="d">
-      <ion-title>Users</ion-title>
-      <ion-buttons slot="end">
-        <ion-icon name="arrow-back" (click)="closeUsersModal()"></ion-icon>
-      </ion-buttons>
-    </div>
+      <div class="search">
+        <ion-item>
+          <ion-input
+            type="text"
+            placeholder="Search account"
+            [(ngModel)]="searchQuery"
+            (ionInput)="filterUsers()"
+          >
+            <ion-icon name="search-outline" slot="start"></ion-icon>
+          </ion-input>
+        </ion-item>
+      </div>
 
-      <div class="e" *ngIf="users.length > 0; else walaTemplate">
-        <div *ngFor="let users  of users" class="j" >
-          <img class="a" src="assets/images/maloi.jpg" alt="User Icon">
-          <p class="b">{{ users.name }}</p>
-          <ion-icon class="c" name="ellipsis-vertical-outline" (click)="presentActionSheetAddfriend(users.name)"></ion-icon>
+      <div class="des">
+        <ion-icon name="pin-outline"></ion-icon>
+        <p class="confirm">Find and pin the account to send files</p>
+      </div>
+
+      <div class="e" *ngIf="filteredUsers.length > 0; else walaTemplate">
+        <div *ngFor="let user of filteredUsers" class="j" (click)="presentActionSheetAddfriend(user.name)">
+          <img class="a" src="assets/images/1by1.png" alt="User Icon" />
+          <p class="b">{{ user.name }}</p>
+         
         </div>
       </div>
 
@@ -113,7 +146,6 @@
           <p class="confirm">No users available.</p>
         </div>
       </ng-template>
-      
-      </div>
+    </div>
   </ng-template>
 </ion-modal>

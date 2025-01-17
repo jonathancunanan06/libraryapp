@@ -31,7 +31,8 @@ export class ProfilePage implements OnInit {
       if (this.currentUser) {
         this.displayName = this.currentUser.displayName || '';
         this.email = this.currentUser.email || '';
-        this.creationDate = this.currentUser.metadata.creationTime;
+        const creationDate = new Date(this.currentUser.metadata.creationTime);
+        this.creationDate = creationDate.toLocaleDateString(); 
       }
     });
 }

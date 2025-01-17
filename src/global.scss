@@ -50,7 +50,7 @@
 
 
 body {
-    --ion-background-color: #ffffff;
+    --ion-background-color: rgb(255, 255, 255);
     --ion-text-color: #000000;
     --ion-toolbar-background: #f8f8f8;
     --ion-toolbar-color: #000000;
@@ -142,13 +142,13 @@ body.dark .j{
 }
 
 body .j{
-  // background:  linear-gradient(to right, #000f2522,rgba(255, 99, 71, 0.147));
+   background:  linear-gradient(to right, #000f2522,rgba(255, 99, 71, 0.147));
   box-shadow: 0 1px 1px 0 rgb(133, 133, 133);
 }
 
 body:not(.dark) .custom-action-sheet .action-sheet-group {
   --ion-button-color:black;
-  background: linear-gradient(to right, #000f25d4,rgba(255, 99, 71, 0.147));
+  background: linear-gradient(to right, #000f25,rgb(255, 99, 71));
   font-family: 'Sour Gummy';
 }
 
@@ -166,3 +166,28 @@ body.dark .icon{
   font-size: 30px;
   margin-top: -5px;
 }
+.splash-screen {
+  position: relative;
+  height: 100vh; 
+  width: 100%; 
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  overflow: hidden;
+}
+
+.splash-screen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/assets/images/bg8.jpg'); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  opacity: 90%; 
+  z-index: -1; 
+}
+

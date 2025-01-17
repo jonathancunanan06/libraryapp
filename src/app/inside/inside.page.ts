@@ -4,6 +4,7 @@ import { getAuth, signOut } from 'firebase/auth';
 import { Platform } from '@ionic/angular';
 import { AuthService } from '../firebase.service';
 import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 @Component({
   selector: 'app-inside',
@@ -19,8 +20,13 @@ export class InsidePage implements OnInit {
   selectedFolderName: string = '';
   selectedFile: File | null = null;  
   folderFiles: any[] = []; 
+  pinnedUsers: { id: number, name: string, email: string }[] = [];
+  friends: any[] = [];
 
-  constructor(private router: Router, private platform: Platform, private authService: AuthService, private actionSheetController: ActionSheetController, private alertController: AlertController, private toastController: ToastController) {
+ 
+  db: any;  
+
+  constructor(private router: Router, private platform: Platform, private authService: AuthService, private actionSheetController: ActionSheetController, private alertController: AlertController, private toastController: ToastController,) {
     this.isDarkMode = document.body.classList.contains('dark');
   }
 
@@ -46,6 +52,10 @@ export class InsidePage implements OnInit {
       this.folders = [];
       this.saveFoldersToLocalStorage();
     }
+
+    
+    const storedFriends = localStorage.getItem('friends');
+    this.friends = storedFriends ? JSON.parse(storedFriends) : [];
   }
 
   isFolderModalOpen = false;
@@ -115,6 +125,8 @@ export class InsidePage implements OnInit {
       localStorage.setItem('theme', 'light');
     }
   }
+
+  
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
@@ -336,7 +348,7 @@ export class InsidePage implements OnInit {
           text: 'Share',
           icon: 'share-outline',
           handler: () => {
-            
+            this.shareFriends();
           }
         },
         {
@@ -353,6 +365,24 @@ export class InsidePage implements OnInit {
       ]
     });
     await actionSheet.present();
+  }
+
+  async shareFriends() {
+
+    const buttons = this.friends.map(friend => ({
+      text: `${friend.name}`,
+      handler: () => {
+        this.presentToast(`Shared file with ${friend.name}`);
+      },
+    }));
+    const alert = await this.alertController.create({
+      header: 'Share to Pinned Users',
+      message: 'Choose a user to share the file with:',
+      cssClass: 'confirm',
+      buttons: buttons,
+    });
+
+    await alert.present();
   }
 
   async confirmDeleteFile(fileName: string) {
